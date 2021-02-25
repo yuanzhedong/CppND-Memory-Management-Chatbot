@@ -37,7 +37,7 @@ ChatBot::ChatBot(ChatBot& other)  // Copy constructor
 {
     std::cout << "ChatBot Copy Constructor" << std::endl;
     this->_image = other._image;
-    //other._image = nullptr;
+    //other._image = nullptr; //(TODO): copy?
     this->_currentNode = other._currentNode;
     this->_rootNode = other._currentNode;
     this->_chatLogic = other._chatLogic;
