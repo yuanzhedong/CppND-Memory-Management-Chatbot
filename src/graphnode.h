@@ -49,6 +49,7 @@ public:
     ////
 
     void MoveChatbotHere(ChatBot& chatbot);
+    ChatBot* GetChatbot();
 
     ////
     //// EOF STUDENT CODE
