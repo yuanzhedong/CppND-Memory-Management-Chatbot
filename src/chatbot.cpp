@@ -56,7 +56,7 @@ ChatBot& ChatBot::operator=(ChatBot& other) { // copy assignment
 
 ChatBot& ChatBot::operator=(ChatBot&& other) { // move assignment
 if (this != &other) {
-    std::cout << "ChatBot Move assignment" << std::endl;
+    std::cout << "ChatBot Move Assignment Operator" << std::endl;
     this->_image = other._image;
     other._image = nullptr;
     this->_currentNode = other._currentNode;
