@@ -36,8 +36,8 @@ ChatBot::ChatBot(std::string filename)
 ChatBot::ChatBot(ChatBot& other)  // Copy constructor
 {
     std::cout << "ChatBot Copy Constructor" << std::endl;
-    this->_image = other._image;
-    //other._image = nullptr; //(TODO): copy?
+    this->_image = new wxBitmap();
+    *_image = *other._image; // or _image = new wxBitmap(*source._image);
     this->_currentNode = other._currentNode;
     this->_rootNode = other._currentNode;
     this->_chatLogic = other._chatLogic;
@@ -46,12 +46,12 @@ ChatBot::ChatBot(ChatBot& other)  // Copy constructor
 
 ChatBot::ChatBot(ChatBot&& other) { // move constructor
     std::cout << "ChatBot Move Constructor" << std::endl;
-    *this = std::move(other);
+    *this = std::move(other); // Can I just reuse the move assignement here to avoid duplicate code?
 }
 
 ChatBot& ChatBot::operator=(ChatBot& other) { // copy assignment
     std::cout << "ChatBot Copy assignment" << std::endl;
-    return *this = ChatBot(other);
+    return *this = ChatBot(other); // Can I just reuse the copy constructor here to avoid duplicate code?
 }
 
 ChatBot& ChatBot::operator=(ChatBot&& other) { // move assignment
@@ -60,8 +60,11 @@ if (this != &other) {
     this->_image = other._image;
     other._image = nullptr;
     this->_currentNode = other._currentNode;
-    this->_rootNode = other._currentNode;
+    other._currentNode = nullptr; // if other doesn't own the _currentNode, do I need to nullify it?
+    this->_rootNode = other._rootNode;
+    other._rootNode = nullptr;
     this->_chatLogic = other._chatLogic;
+    other._chatLogic = nullptr;
     this->_chatLogic->SetChatbotHandle(this);
 
 }
